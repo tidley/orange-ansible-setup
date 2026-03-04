@@ -1,10 +1,10 @@
 # orange-ansible-setup
 
-Ansible playbook to replicate my baseline setup:
+Ansible playbook to replicate core baseline setup:
 - installs git/curl/gh/node/npm
 - creates OpenClaw workspace folders
 - seeds IDENTITY.md, USER.md, MEMORY.md
-- clones/updates `friendpub`
+- does **not** include app repos or any private keys/secrets
 
 ## Run
 

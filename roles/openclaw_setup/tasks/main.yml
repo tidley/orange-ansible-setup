@@ -34,11 +34,3 @@
     - { src: 'USER.md.j2', dest: 'USER.md' }
     - { src: 'MEMORY.md.j2', dest: 'MEMORY.md' }
 
-- name: Clone/update friendpub
-  become: false
-  ansible.builtin.git:
-    repo: "{{ friendpub_repo }}"
-    dest: "{{ projects_root }}/friendpub"
-    version: main
-    update: true
-    force: false
