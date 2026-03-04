@@ -1,0 +1,11 @@
+---
+- name: Replicate Orange setup
+  hosts: local
+  become: true
+  vars_prompt:
+    - name: github_owner
+      prompt: "GitHub owner/user for friendpub"
+      private: no
+      default: "tom"
+  roles:
+    - openclaw_setup

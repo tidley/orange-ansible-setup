@@ -1,0 +1,6 @@
+user_name: tom
+user_home: "/home/{{ user_name }}"
+workspace_root: "{{ user_home }}/.openclaw/workspace"
+projects_root: "{{ user_home }}/code"
+friendpub_repo: "https://github.com/{{ github_owner }}/friendpub.git"
+github_owner: tom

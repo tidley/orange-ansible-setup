@@ -1,0 +1,44 @@
+---
+- name: Install base packages
+  ansible.builtin.apt:
+    name:
+      - git
+      - curl
+      - gh
+      - nodejs
+      - npm
+    state: present
+    update_cache: true
+
+- name: Ensure directories exist
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+    mode: '0755'
+  loop:
+    - "{{ projects_root }}"
+    - "{{ workspace_root }}"
+    - "{{ workspace_root }}/memory"
+
+- name: Seed identity files
+  ansible.builtin.template:
+    src: "{{ item.src }}"
+    dest: "{{ workspace_root }}/{{ item.dest }}"
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+    mode: '0644'
+  loop:
+    - { src: 'IDENTITY.md.j2', dest: 'IDENTITY.md' }
+    - { src: 'USER.md.j2', dest: 'USER.md' }
+    - { src: 'MEMORY.md.j2', dest: 'MEMORY.md' }
+
+- name: Clone/update friendpub
+  become: false
+  ansible.builtin.git:
+    repo: "{{ friendpub_repo }}"
+    dest: "{{ projects_root }}/friendpub"
+    version: main
+    update: true
+    force: false
